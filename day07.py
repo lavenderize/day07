@@ -2,6 +2,7 @@
 
 import math
 
+
 class Shape:
     def __init__(self, x, y):
         self.x = x
@@ -19,6 +20,9 @@ class Circle(Shape):
     def get_area(self):
         return math.pi * self.radius * self.radius
 
+    def __repr__(self):
+        return f'원의 좌표는 x: {self.x}, y: {self.y}이고 넓이는 {self.get_area()}입니다.'
+
 
 class Rectangle(Shape):
     def __init__(self, x, y, width, length):
@@ -28,6 +32,17 @@ class Rectangle(Shape):
 
     def get_area(self):
         return self.width * self.length
+
+    def __repr__(self):
+        return f'사각형의 좌표는 x: {self.x}, y: {self.y}이고 넓이는 {self.get_area()}입니다.'
+
+    def __add__(self, other):
+        # 두 사각형 넓이의 합
+        # return (self.width * self.length) + (other.width * other.length)
+
+        # 각 사각형 width의 합과 length의 합의 곱
+        return Rectangle(0, 0, (self.width + other.width), (self.length + other.length))
+
 
 class Cylinder(Circle):
     def __init__(self, x, y, radius, height):
@@ -39,14 +54,17 @@ class Cylinder(Circle):
         return super().get_area() * self.height
 #        return math.pi * (self.radius ** 2) * self.height
 
+    def __repr__(self):
+        return f'원기둥의 좌표는 x: {self.x}, y: {self.y}이고 넓이는 {self.get_area()}입니다.'
+
 
 c1 = Circle(100, 100, 10.0)
-c2 = Circle(50, 50, 2.0)
 r1 = Rectangle(100, 50, 5, 2)
+r2 = Rectangle(70, 30, 10, 15)
 cy1 = Cylinder(20, 20, 10.0, 2)
 
-print(f'사각형의 좌표는 x: {r1.x}, y: {r1.y}이고 넓이는 {r1.get_area()}입니다.')
-print(f'원의 좌표는 x: {c2.x}, y: {c2.y}이고 넓이는 {c2.get_area()}입니다.')
-print(f'원의 좌표는 x: {c1.x}, y: {c1.y}이고 넓이는 {c1.get_area()}입니다.')
-print(f'원기둥의 좌표는 x: {cy1.x}, y: {cy1.y}이고 넓이는 {cy1.get_area()}입니다.')
+print(r1)
+print(c1)
+print(cy1)
+print(r1 + r2)
 
